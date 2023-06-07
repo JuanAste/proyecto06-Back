@@ -1,4 +1,4 @@
-const { Products } = require("../db");
+const { Products } = require("../../db");
 
 const postProduct = async (req, res, next) => {
   const product = req.body;

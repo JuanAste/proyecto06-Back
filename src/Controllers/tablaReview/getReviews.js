@@ -1,10 +1,14 @@
-const { Products, Reviews } = require("../db");
+const { Products, Reviews } = require("../../db");
 
 const getAllProducts = async (req, res) => {
   try {
-    const products = await Products.findAll({
+    const { cantidad, paginas } = req.body;
+    const pagina = (paginas - 1) * cantidad;
+    const products = await Reviews.findAll({
+      offset: pagina,
+      limit: cantidad,
       include: {
-        model: Reviews,
+        model: Products,
         attributes: ["name"],
         through: {
           attributes: [],
