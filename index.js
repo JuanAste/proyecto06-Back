@@ -42,7 +42,6 @@ conn.sync({ force: true }).then(async () => {
     defaults:{
       userName: "Juan",
       email: "juan@gmail.com",
-      password:"12345"
     }
   })
 });
