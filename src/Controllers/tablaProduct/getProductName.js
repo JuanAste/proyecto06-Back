@@ -2,9 +2,8 @@ const { Op } = require("sequelize");
 const { Products } = require("../../db");
 
 const getByName = (req, res, next) => {
-  const { search } = req.query;
-  const { cantidad, paginas } = req.body;
-  const pagina = (paginas - 1) * cantidad;
+  const { search, paginas } = req.query;
+  const pagina = (paginas - 1) * 10;
   Products.findAll({
     where: {
       name: {
@@ -12,7 +11,7 @@ const getByName = (req, res, next) => {
       },
     },
     offset: pagina,
-    limit: cantidad,
+    limit: 10,
   })
     .then((products) => {
       res.send(products);

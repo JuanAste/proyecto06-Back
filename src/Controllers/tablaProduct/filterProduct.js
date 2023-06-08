@@ -11,11 +11,10 @@ const filterProduct = async (req, res, next) => {
     contenido,
     envase,
     ordenarmiento,
-    cantidad,
-    paginas,
   } = req.body;
+  const { paginas } = req.query;
 
-  const pagina = (paginas - 1) * cantidad;
+  const pagina = (paginas - 1) * 10;
 
   const findProduct = {};
   const oredenar = [];
@@ -69,7 +68,7 @@ const filterProduct = async (req, res, next) => {
   Products.findAll({
     where: findProduct,
     offset: pagina,
-    limit: cantidad,
+    limit: 10,
     include: [Reviews],
     order: oredenar,
   })
