@@ -9,10 +9,6 @@ const getAllProducts = async (req, res) => {
       limit: cantidad,
       include: {
         model: Reviews,
-        attributes: ["name"],
-        through: {
-          attributes: [],
-        },
       },
     });
     if (products.length) {

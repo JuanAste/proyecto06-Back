@@ -1,19 +1,20 @@
-const { Products, Reviews } = require("../../db");
+const { Products, Reviews, Users } = require("../../db");
 
-const getAllProducts = async (req, res) => {
+const getAllReviews = async (req, res) => {
   try {
-    const { cantidad, paginas } = req.body;
-    const pagina = (paginas - 1) * cantidad;
+    // const { cantidad, paginas } = req.body;
+    // const pagina = (paginas - 1) * cantidad;
     const products = await Reviews.findAll({
-      offset: pagina,
-      limit: cantidad,
-      include: {
-        model: Products,
-        attributes: ["name"],
-        through: {
-          attributes: [],
+      // offset: pagina,
+      // limit: cantidad,
+      include: [
+        {
+          model: Products,
         },
-      },
+        {
+          model: Users,
+        },
+      ],
     });
     if (products.length) {
       res.status(200).json(products);
@@ -25,4 +26,4 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-module.exports = getAllProducts;
+module.exports = getAllReviews;

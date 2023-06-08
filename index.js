@@ -1,12 +1,12 @@
-const { productos } = require("./database.js");
+const { productos } = require("./src/preLoad/products");
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const port = process.env.PORT || 3001;
-const { Products } = require("./src/db.js");
+const { Products, Users } = require("./src/db.js");
 
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: true }).then(async () => {
   //force: true
   server.listen(port, () => {
     console.log(`%s listening at ${port}`);
@@ -35,4 +35,14 @@ conn.sync({ force: true }).then(() => {
       },
     });
   });
+  await Users.findOrCreate({
+    where: {
+      userName: "Juan",
+    },
+    defaults:{
+      userName: "Juan",
+      email: "juan@gmail.com",
+      password:"12345"
+    }
+  })
 });
