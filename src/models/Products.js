@@ -20,6 +20,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      alcoholContent: {
+        type: DataTypes.FLOAT,
+      },
       Variety: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -32,6 +35,9 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      cask: {
+        type: DataTypes.INTEGER,
+      },
       price: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -39,13 +45,13 @@ module.exports = (sequelize) => {
       stock: {
         type: DataTypes.INTEGER,
       },
-      ableDiscount:{
+      ableDiscount: {
         type: DataTypes.BOOLEAN,
       },
       percentageDiscount: {
         type: DataTypes.FLOAT,
       },
-      container:{
+      container: {
         type: DataTypes.STRING,
         allowNull: false,
       },

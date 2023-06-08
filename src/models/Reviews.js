@@ -12,15 +12,6 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
       score: {
         type: DataTypes.FLOAT,
         allowNull: false,

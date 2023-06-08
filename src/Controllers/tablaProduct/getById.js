@@ -1,4 +1,4 @@
-const { Products, Reviews } = require("../db");
+const { Products, Reviews } = require("../../db");
 
 
 const getByID = (req, res, next) => {

@@ -1,21 +1,21 @@
 const { Op } = require("sequelize");
-const { Products, Reviews } = require("../db");
+const { Products, Reviews } = require("../../db");
 
 const filterProduct = async (req, res, next) => {
   const {
     tipos,
-    precio,
     ofertas,
-    reviews,
-    ventas,
     porcentajeDesc,
     Variedad,
     marca,
     contenido,
-    discountOrd,
-    contenidoOrd,
     envase,
+    ordenarmiento,
+    cantidad,
+    paginas,
   } = req.body;
+
+  const pagina = (paginas - 1) * cantidad;
 
   const findProduct = {};
   const oredenar = [];
@@ -62,45 +62,14 @@ const filterProduct = async (req, res, next) => {
     };
   }
 
-  if (discountOrd === "A") {
-    oredenar.push(["percentageDiscount", "ASC"]);
+  if (ordenarmiento) {
+    oredenar.push([`${ordenarmiento.name}`, `${ordenarmiento.order}`]);
   }
 
-  if (discountOrd === "D") {
-    oredenar.push(["percentageDiscount", "DESC"]);
-  }
-
-  if (contenidoOrd === "A") {
-    oredenar.push(["amount", "ASC"]);
-  }
-
-  if (contenidoOrd === "D") {
-    oredenar.push(["amount", "DESC"]);
-  }
-
-  if (precio === "A" && ventas === "") {
-    oredenar.push(["price", "ASC"]);
-  }
-  if (precio === "D" && ventas === "") {
-    oredenar.push(["price", "DESC"]);
-  }
-
-  if (ventas === "A" && precio === "") {
-    oredenar.push(["sells", "ASC"]);
-  }
-
-  if (ventas === "D" && precio === "") {
-    oredenar.push(["sells", "DESC"]);
-  }
-
-  if (reviews === "A") {
-    oredenar.push(["averageScore", "ASC"]);
-  }
-  if (reviews === "D") {
-    oredenar.push(["averageScore", "DESC"]);
-  }
   Products.findAll({
     where: findProduct,
+    offset: pagina,
+    limit: cantidad,
     include: [Reviews],
     order: oredenar,
   })
