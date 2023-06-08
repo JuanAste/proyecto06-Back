@@ -3,7 +3,7 @@ const { Filtros } = require("../../db");
 
 const getFiltro = async (req, res) => {
   try {
-    const {name} = req.body
+    const {name} = req.query
     const propiedadesfiltro = await Filtros.findOne({where:{name}})
     res.status(200).json(propiedadesfiltro);
   } catch (error) {
