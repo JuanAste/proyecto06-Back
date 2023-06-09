@@ -28,6 +28,7 @@ conn.sync({ force: true }).then(() => {
         brand: producto.brand,
         alcoholContent: producto.alcoholContent,
         Variety: producto.Variety,
+        cask: producto.cask,
         container: producto.container,
         description: producto.description,
         ableDiscount: producto.ableDiscount,
