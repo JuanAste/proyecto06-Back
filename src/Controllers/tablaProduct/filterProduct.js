@@ -11,6 +11,7 @@ const filterProduct = async (req, res, next) => {
     contenido,
     envase,
     ordenarmiento,
+    cask
   } = req.body;
   const { paginas } = req.query;
 
@@ -23,6 +24,12 @@ const filterProduct = async (req, res, next) => {
     findProduct.type = {
       [Op.eq]: tipos,
     };
+  }
+
+  if(cask){
+    findProduct.cask = {
+      [Op.gt]: cask
+    }
   }
 
   if (Variedad) {
@@ -39,7 +46,7 @@ const filterProduct = async (req, res, next) => {
 
   if (contenido) {
     findProduct.amount = {
-      [Op.gte]: contenido,
+      [Op.lt]: contenido,
     };
   }
 
