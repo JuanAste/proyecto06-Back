@@ -11,7 +11,7 @@ const filterProduct = async (req, res, next) => {
     contenido,
     envase,
     ordenarmiento,
-    cask
+    cask,
   } = req.body;
   const { paginas } = req.query;
 
@@ -20,55 +20,55 @@ const filterProduct = async (req, res, next) => {
   const findProduct = {};
   const oredenar = [];
 
-  if (tipos) {
+  if (tipos !== "") {
     findProduct.type = {
       [Op.eq]: tipos,
     };
   }
 
-  if(cask){
+  if (cask > 0) {
     findProduct.cask = {
-      [Op.gt]: cask
-    }
+      [Op.gte]: cask,
+    };
   }
 
-  if (Variedad) {
+  if (Variedad !== "") {
     findProduct.Variety = {
       [Op.eq]: Variedad,
     };
   }
 
-  if (envase) {
+  if (envase !== "") {
     findProduct.container = {
       [Op.eq]: envase,
     };
   }
 
-  if (contenido) {
+  if (contenido && contenido.hasta > 0) {
     findProduct.amount = {
-      [Op.lt]: contenido,
+      [Op.between]: [contenido.desde, contenido.hasta],
     };
   }
 
-  if (marca) {
+  if (marca !== "") {
     findProduct.brand = {
       [Op.eq]: marca,
     };
   }
 
-  if (ofertas) {
+  if (ofertas !== "null") {
     findProduct.ableDiscount = {
       [Op.eq]: ofertas,
     };
   }
 
-  if (porcentajeDesc) {
+  if (porcentajeDesc && porcentajeDesc.hasta > 0) {
     findProduct.percentageDiscount = {
-      [Op.gte]: porcentajeDesc,
+      [Op.between]: [porcentajeDesc.desde, porcentajeDesc.hasta],
     };
   }
 
-  if (ordenarmiento) {
+  if (ordenarmiento && ordenarmiento.name !== "" && ordenarmiento.order !== "") {
     oredenar.push([`${ordenarmiento.name}`, `${ordenarmiento.order}`]);
   }
 
