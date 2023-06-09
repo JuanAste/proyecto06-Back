@@ -1,6 +1,6 @@
 const filtros = [
   {
-    name: "marcaCerveza",
+    name: "marcaBeer",
     data: [
       "Guinnes",
       "Corona",
@@ -15,7 +15,7 @@ const filtros = [
     ],
   },
   {
-    name: "marcaVino",
+    name: "marcaWine",
     data: [
       "Luigi Bosca",
       "Nicasia Vineyard",
@@ -40,19 +40,19 @@ const filtros = [
     ],
   },
   {
-    name: "marcaLicor",
+    name: "marcaLiqueur",
     data: ["Salentein Wine", "Christallino"],
   },
   {
-    name: "marcaBebidas",
+    name: "marcaDrinks",
     data: ["San Luis", "Coca-Cola", "7 UP"],
   },
   {
-    name: "saborCerveza",
+    name: "saborBeer",
     data: ["Negra", "Rubia", "White"],
   },
   {
-    name: "saborVino",
+    name: "saborWine",
     data: ["Malbec", "Tinto", "Blend", "Blanco"],
   },
   {
@@ -60,11 +60,11 @@ const filtros = [
     data: ["Dorado", "Añejo"],
   },
   {
-    name: "saborLicor",
+    name: "saborLiqueur",
     data: ["Pera", "Blend"],
   },
   {
-    name: "saborBebida",
+    name: "saborDrinks",
     data: ["Water", "Sugary Drink"],
   },
   {
