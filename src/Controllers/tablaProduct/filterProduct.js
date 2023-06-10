@@ -13,12 +13,18 @@ const filterProduct = async (req, res, next) => {
     ordenarmiento,
     cask,
   } = req.body;
-  const { paginas } = req.query;
+  const { paginas, search } = req.query;
 
   const pagina = (paginas - 1) * 10;
 
   const findProduct = {};
   const oredenar = [];
+
+  if (search !== "") {
+    findProduct.name = {
+      [Op.iLike]: `%${search}%`,
+    };
+  }
 
   if (tipos !== "") {
     findProduct.type = {
@@ -68,7 +74,11 @@ const filterProduct = async (req, res, next) => {
     };
   }
 
-  if (ordenarmiento && ordenarmiento.name !== "" && ordenarmiento.order !== "") {
+  if (
+    ordenarmiento &&
+    ordenarmiento.name !== "" &&
+    ordenarmiento.order !== ""
+  ) {
     oredenar.push([`${ordenarmiento.name}`, `${ordenarmiento.order}`]);
   }
 
