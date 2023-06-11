@@ -1,8 +1,8 @@
-const { Products, Reviews, Users } = require("../../db");
+const { Products, Users, Pedidos } = require("../../db");
 
-const postReview = async (req, res) => {
+const postPedidos = async (req, res) => {
   try {
-    const { userId, productId, score, content } = req.body;
+    const { userId, productId, cantidad } = req.body;
 
     const usuario = await Users.findByPk(userId);
     const product = await Products.findByPk(productId);
@@ -12,18 +12,17 @@ const postReview = async (req, res) => {
     } else if (!product) {
       res.status(400).json({ messaje: "no se encontro el producto" });
     } else {
-      const newReview = await Reviews.create({
-        score: score,
-        content: content,
+      const newPedido = await Pedidos.create({
+        cantidad: cantidad
       });
-      await newReview.addProduct(product);
-      await newReview.addUser(usuario);
+      await newPedido.addProduct(product);
+      await newPedido.addUser(usuario);
 
-      res.status(200).json(newReview);
+      res.status(200).json(newPedido);
     }
   } catch (error) {
     res.status(500).json({messaje: error})
   }
 };
 
-module.exports = postReview;
+module.exports = postPedidos;
