@@ -1,50 +1,45 @@
-const paypal = require('paypal-rest-sdk')
+const paypal = require('paypal-rest-sdk');
+
 paypal.configure({
-    mode: 'sandbox', 
-    client_id: process.env.PAYPAL_CLIENT_ID,
-    client_secret: process.env.PAYPAL_CLIENT_SECRET,
-  });
-const createOrder=(req, res)=>{
-    const producto= req.body
-    const create_payment_json = {
-        intent: 'authorize', 
-        payer: {
-          payment_method: 'paypal',
+  mode: process.env.PAYPAL_MODE,
+  client_id: process.env.PAYPAL_CLIENT_ID,
+  client_secret: process.env.PAYPAL_CLIENT_SECRET,
+});
+
+const createPayment = async (req, res) => {
+  const { amount, currency, description } = req.body;
+
+  const paymentData = {
+    intent: 'sale',
+    payer: {
+      payment_method: 'paypal',
+    },
+    transactions: [
+      {
+        amount: {
+          total: amount,
+          currency,
         },
-        redirect_urls: {
-          return_url: 'http://localhost:3000/success',
-          cancel_url: 'http://localhost:3000/cancel',
-        },
-        transactions: [
-          {
-            item_list: {
-              items: [
-                {
-                  name: producto.name,
-                  sku: 'item-001',
-                  price: producto.price,
-                  currency: 'USD',
-                  quantity: producto.quantity,
-                },
-              ],
-            },
-            amount: {
-              currency: 'USD',
-              total: producto.price,
-            },
-            description: producto.description,
-          },
-        ],
-      };
-    
-      paypal.payment.create(create_payment_json, (error, payment) => {
-        if (error) {
-          console.error(error);
-          res.status(500).json({ message: 'Error al crear la orden de pago' });
-        } else {
-          const approval_url = payment.links.find(link => link.rel === 'approval_url').href;
-          res.json({ approval_url });
-        }
-      });
+        description,
+      },
+    ],
+    redirect_urls: {
+      return_url: process.env.PAYPAL_SUCCESS_URL,
+      cancel_url: process.env.PAYPAL_CANCEL_URL,
+    },
+  };
+
+  paypal.payment.create(paymentData, (error, payment) => {
+    if (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error creating PayPal payment' });
+    } else {
+      // Guarda la información del pago en tu base de datos si es necesario
+      // ...
+
+      // Redirige al cliente a la URL de aprobación de PayPal
+      const approvalUrl = payment.links.find((link) => link.rel === 'approval_url').href;
+      res.json({ approvalUrl });
     }
-    module.exports = createOrder
+  });
+};
