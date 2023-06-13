@@ -11,57 +11,74 @@ const filterProduct = async (req, res, next) => {
     contenido,
     envase,
     ordenarmiento,
+    cask,
   } = req.body;
-  const { paginas } = req.query;
+  const { paginas, search } = req.query;
 
   const pagina = (paginas - 1) * 10;
 
   const findProduct = {};
   const oredenar = [];
 
-  if (tipos) {
+  if (search !== "") {
+    findProduct.name = {
+      [Op.iLike]: `%${search}%`,
+    };
+  }
+
+  if (tipos !== "") {
     findProduct.type = {
       [Op.eq]: tipos,
     };
   }
 
-  if (Variedad) {
+  if (cask > 0) {
+    findProduct.cask = {
+      [Op.gte]: cask,
+    };
+  }
+
+  if (Variedad !== "") {
     findProduct.Variety = {
       [Op.eq]: Variedad,
     };
   }
 
-  if (envase) {
+  if (envase !== "") {
     findProduct.container = {
       [Op.eq]: envase,
     };
   }
 
-  if (contenido) {
+  if (contenido && contenido.hasta > 0) {
     findProduct.amount = {
-      [Op.gte]: contenido,
+      [Op.between]: [contenido.desde, contenido.hasta],
     };
   }
 
-  if (marca) {
+  if (marca !== "") {
     findProduct.brand = {
       [Op.eq]: marca,
     };
   }
 
-  if (ofertas) {
+  if (ofertas !== "null") {
     findProduct.ableDiscount = {
       [Op.eq]: ofertas,
     };
   }
 
-  if (porcentajeDesc) {
+  if (porcentajeDesc && porcentajeDesc.hasta > 0) {
     findProduct.percentageDiscount = {
-      [Op.gte]: porcentajeDesc,
+      [Op.between]: [porcentajeDesc.desde, porcentajeDesc.hasta],
     };
   }
 
-  if (ordenarmiento) {
+  if (
+    ordenarmiento &&
+    ordenarmiento.name !== "" &&
+    ordenarmiento.order !== ""
+  ) {
     oredenar.push([`${ordenarmiento.name}`, `${ordenarmiento.order}`]);
   }
 
