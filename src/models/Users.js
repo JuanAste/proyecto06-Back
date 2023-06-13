@@ -10,6 +10,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    image: {
+      type: DataTypes.STRING,
+    },
     userName: {
       type: DataTypes.STRING,
     },
@@ -18,7 +21,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    age:{
+    age: {
       type: DataTypes.INTEGER,
     },
     phone: {

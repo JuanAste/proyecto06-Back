@@ -2,7 +2,7 @@ const { Users, Reviews, Products } = require("../../db");
 
 const getUserEmail = (req, res, next) => {
   const { email } = req.query;
-  Users.findOne({
+  Users.findOrCreate({
     where: {
       email: email,
     }
