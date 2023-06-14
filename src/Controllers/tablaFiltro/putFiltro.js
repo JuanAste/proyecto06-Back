@@ -1,15 +1,22 @@
 const { Filtros } = require("../../db");
 
 const putFiltro = async (req, res) => {
+  const notFound = false;
   try {
-    const { name, data } = req.body;
-    const filtro = await Filtros.findOne({ where: { name: name } });
-    if (filtro === null) {
-      res.status(200).json({ messaje: "no se encontro el filtrado" });
+    const newFiltros = req.body;
+    for (const filt of newFiltros) {
+      const filtro = await Filtros.findOne({ where: { name: filt.name } });
+      if (filtro) {
+        filtro.data = filtro.data.concat(filt.data);
+        await filtro.save();
+      } else {
+        notFound = false;
+      }
+    }
+    if (notFound) {
+      res.status(404).json({ messaje: "no se ha encontrado un flitro" });
     } else {
-      filtro.data = filtro.data.concat(data);
-      await filtro.save();
-      res.status(200).json(filtro);
+      res.status(200).json({ messaje: "Se ha cambiado el filtro" });
     }
   } catch (error) {
     res.status(500).json({ error: error.messaje });
