@@ -4,9 +4,11 @@ const filtro = require("./filtros");
 const review = require("./reviews");
 const user = require("./users");
 const pedidos = require("./pedidos")
+const buy = require("./buys")
 
 const router = Router();
 
+router.use("/buy", buy)
 router.use("/product", product);
 router.use("/filtros", filtro);
 router.use("/reviews", review);
