@@ -40,11 +40,12 @@ conn.sync({ force: true }).then(() => {
   users.forEach(async (user) => {
     await Users.findOrCreate({
       where: {
-        userName: user.userName,
+        email: user.email,
       },
       defaults: {
         userName: user.userName,
         email: user.email,
+        admin: user.admin
       },
     });
   });
