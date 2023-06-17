@@ -23,5 +23,14 @@ router.post("/", async (req, res) => {
     res.json({ message: error });
   }
 });
+router.get("/all", async(req, res) => {
+  try {
+    const sales = await stripe.charges.list();
+    res.send(sales.data)
+  } catch (error) {
+    console.error('Error al obtener las ventas de Stripe:', error);
+    res.send({message:error.message})
+  }
+})
 
 module.exports = router;
