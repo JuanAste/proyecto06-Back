@@ -30,6 +30,9 @@ module.exports = (sequelize) => {
     ubicacion: {
       type: DataTypes.STRING,
     },
+    admin:{
+      type: DataTypes.STRING,
+    },
     record: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
     },
