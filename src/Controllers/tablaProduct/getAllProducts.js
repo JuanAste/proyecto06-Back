@@ -10,6 +10,7 @@ const getAllProducts = async (req, res) => {
       include: {
         model: Reviews,
       },
+      order:[["id", "ASC"]]
     });
     if (products.length) {
       res.status(200).json(products);
