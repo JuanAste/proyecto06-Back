@@ -2,9 +2,9 @@ const { Users } = require("../../db");
 
 const putUser = async (req, res, next) => {
   try {
-    const { userId, changes } = req.body;
+    const { userEmail, changes } = req.body;
 
-    const user = await Users.findByPk(userId);
+    const user = await Users.findOne({ where: { email: userEmail } });
 
     if (user) {
       for (const change of changes) {
@@ -19,7 +19,7 @@ const putUser = async (req, res, next) => {
       res.send({ message: "No se encontró el usuario" });
     }
   } catch (error) {
-    res.status(500).json({ error: error.messaje });
+    res.status(500).json({ error: error.message });
   }
 };
 
