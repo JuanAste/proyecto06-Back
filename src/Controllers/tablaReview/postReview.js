@@ -2,9 +2,9 @@ const { Products, Reviews, Users } = require("../../db");
 
 const postReview = async (req, res) => {
   try {
-    const { userId, productId, score, content } = req.body;
+    const { userEmail, productId, score, content } = req.body;
 
-    const usuario = await Users.findByPk(userId);
+    const usuario = await Users.findOne({ where: { email: userEmail } });
     const product = await Products.findByPk(productId);
 
     if (!usuario) {

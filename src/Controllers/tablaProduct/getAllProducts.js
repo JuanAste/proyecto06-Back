@@ -14,10 +14,10 @@ const getAllProducts = async (req, res) => {
     if (products.length) {
       res.status(200).json(products);
     } else {
-      res.status(404).json({ messaje: "missing Products" });
+      res.status(404).json({ message: "missing Products" });
     }
   } catch (error) {
-    res.status(500).json({ error: error.messaje });
+    res.status(500).json({ error: error.message });
   }
 };
 
