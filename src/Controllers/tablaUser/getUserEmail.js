@@ -1,4 +1,4 @@
-const { Users, Reviews, Products } = require("../../db");
+const { Users } = require("../../db");
 
 const getUserEmail = (req, res, next) => {
   const { email } = req.query;

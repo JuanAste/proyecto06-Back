@@ -1,16 +1,22 @@
+const { Op } = require("sequelize");
 const { Products, Reviews } = require("../../db");
 
 const getAllProducts = async (req, res) => {
   try {
-    const { paginas } = req.query;
+    const { search, paginas } = req.query;
     const pagina = (paginas - 1) * 10;
     const products = await Products.findAll({
+      where: {
+        name: {
+          [Op.iLike]: `%${search}%`,
+        },
+      },
       offset: pagina,
       limit: 10,
       include: {
         model: Reviews,
       },
-      order:[["id", "ASC"]]
+      order: [["id", "ASC"]],
     });
     if (products.length) {
       res.status(200).json(products);

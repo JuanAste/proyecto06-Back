@@ -45,7 +45,7 @@ conn.sync({ force: true }).then(() => {
       defaults: {
         userName: user.userName,
         email: user.email,
-        admin: user.admin
+        admin: true
       },
     });
   });

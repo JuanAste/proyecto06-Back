@@ -31,10 +31,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     admin:{
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
     },
     record: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
     },
+    ban:{
+      type: DataTypes.BOOLEAN,
+    }
   });
 };
