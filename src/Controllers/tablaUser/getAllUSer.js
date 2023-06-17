@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Users } = require("../../db");
 
 const getUserAll = (req, res, next) => {
