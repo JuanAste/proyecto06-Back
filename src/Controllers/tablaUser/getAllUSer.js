@@ -6,7 +6,7 @@ const getUserAll = (req, res, next) => {
     const pagina = (paginas - 1) * 10;
   Users.findAll({
     where: {
-        userName: {
+        email: {
         [Op.iLike]: `%${search}%`,
       },
     },
