@@ -2,16 +2,7 @@ const { Products, Pedidos, Users } = require("../../db");
 
 const getAllPedidos = async (req, res) => {
   try {
-    const pedidos = await Pedidos.findAll({
-      include: [
-        {
-          model: Users,
-        },
-        {
-          model: Products,
-        },
-      ],
-    });
+    const pedidos = await Pedidos.findAll();
     if (pedidos.length) {
       res.status(200).json(pedidos);
     } else {

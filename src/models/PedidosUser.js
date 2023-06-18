@@ -5,13 +5,12 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("pedidos", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
     },
-    cantidad: {
-      type: DataTypes.INTEGER,
+    estado: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   });
