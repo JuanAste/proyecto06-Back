@@ -17,7 +17,9 @@ const filterProduct = async (req, res, next) => {
 
   const pagina = (paginas - 1) * 10;
 
-  const findProduct = {};
+  const findProduct = {availability: true, stock:{
+    [Op.gt]: 0
+  }};
   const oredenar = [];
 
   if (search !== "") {
@@ -69,6 +71,9 @@ const filterProduct = async (req, res, next) => {
   }
 
   if (porcentajeDesc && porcentajeDesc.hasta > 0) {
+    findProduct.ableDiscount = {
+      [Op.eq]: true,
+    };
     findProduct.percentageDiscount = {
       [Op.between]: [porcentajeDesc.desde, porcentajeDesc.hasta],
     };
@@ -80,6 +85,10 @@ const filterProduct = async (req, res, next) => {
     ordenarmiento.order !== ""
   ) {
     oredenar.push([`${ordenarmiento.name}`, `${ordenarmiento.order}`]);
+  }
+
+  if(!oredenar.length){
+    oredenar.push(["id", "ASC"]);
   }
 
   Products.findAll({
