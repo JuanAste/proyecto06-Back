@@ -8,50 +8,55 @@ const stripe = new Stripe(STRIPE);
 
 router.post("/", async (req, res) => {
   try {
-    const { id, amount, product, email } = req.body;
+    const { products, id, email, amount } = req.body;
+   
 
     const payment = await stripe.paymentIntents.create({
       amount,
       currency: "USD",
-      description: product,
+      description: products,
       payment_method: id,
       confirm: true,
       receipt_email: email,
       metadata: {
-        delivery_status: "pending"
-      }
+        delivery_status: "pending",
+      },
     });
-    await Pedidos.create({id:payment.payment_method, estado: "pending"})
+    await Pedidos.create({ id: payment.payment_method, estado: "pending" });
     res.send({ message: "comprado" });
   } catch (error) {
-    res.json({ message: error });
+    res.status(500).send({ message: error });
   }
 });
-router.get("/all", async(req, res) => {
+router.get("/all", async (req, res) => {
   try {
-    const sales = await stripe.charges.list();
-    res.send(sales.data)
+    const options = { limit: 1000 };
+    const sales = await stripe.charges.list(options);
+    res.send(sales.data);
   } catch (error) {
-    console.error('Error al obtener las ventas de Stripe:', error);
-    res.send({message:error.message})
+    console.error("Error al obtener las ventas de Stripe:", error);
+    res.status(500).send({ message: error.message });
   }
-})
+});
 router.put("/put", async (req, res) => {
   try {
-    const { idVent, status} = req.query;
+    const { idVent, status } = req.query;
     const updatedMetadata = {
-      delivery_status: status 
+      delivery_status: status,
     };
     const paymentIntent = await stripe.paymentIntents.update(idVent, {
-      metadata: updatedMetadata
+      metadata: updatedMetadata,
     });
-    const pedido = await Pedidos.findByPk(idVent)
-    pedido.estado = status
-    pedido.save()
-    res.send(paymentIntent)
+    const pedido = await Pedidos.findByPk(idVent);
+    pedido.estado = status;
+    pedido.save();
+    res.send(paymentIntent);
   } catch (error) {
-    res.send(error.message)
+    res.status(500).send(error.message);
   }
-})
+});
+
+
+
 
 module.exports = router;
