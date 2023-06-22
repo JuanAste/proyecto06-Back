@@ -565,7 +565,7 @@ const productos = [
     Variety: "Water",
     container: "Botella",
     images: [
-      "https://lh3.googleusercontent.com/67yzvImGr6MYIpz2etrZ1uCC1JFH6n1UdZ9K-sUAtVF2-YWEML-lpfEowf9psLIiDshYhUUsn7SS-cfed0uy6K2Sc6trZae5WEUkTuqt",
+      "https://lh3.googleusercontent.com/HLgsqITyY1p1pfCNwWxX355RzXCeVXGWoGyZ3kt0mvVE87DcEs7xLysFP8E5IJA71j0UTz-YKUVK7IUJDJK_9tDN33h-ILzmrd4c1pwPHw",
     ],
     description: "Agua mineral sin gas 625 ml",
     ableDiscount: true,
@@ -584,7 +584,7 @@ const productos = [
     Variety: "Sugary Drink",
     container: "Botella",
     images: [
-      "https://lh3.googleusercontent.com/IHSaPiTWz0v7Hp-gqtKxat_0Pyo42HHttzsTrNLDvAixSnnXf_0RRNtGNGkCfUnQ5Gs4R0H2Db12pQJs3zMjRkCaXTGMVRXQ6Kgz6EX7",
+      "https://lh3.googleusercontent.com/wt5E-NeEkOSgyq9y9S9BAANom6ev7nzqNz05b1-gAL3_nk_UmSvdcI5mFEC7qQzNvxFjiRgkM6r7UO7NEeo6xkFzZU_74GTAU6FOFq6fvg",
     ],
     description: "Coca-cola refrescante para compartir en familia",
     ableDiscount: false,
@@ -603,7 +603,7 @@ const productos = [
     Variety: "Sugary Drink",
     container: "Botella",
     images: [
-      "https://lh3.googleusercontent.com/9MS_w_2IKZ3XTXyAEsMnaTocgGYqDGAbCfC4yNMBLSGll6SyAanH4INFptjntDRwViHTfc6SbRrGVIunXrBxaULPrZuJ2Hnt8VktvEzlkw",
+      "https://lh3.googleusercontent.com/l3lW2pd7iI-1zxjtQJJuz3A62lF8wYU-oVqfrshx2-CduDE8nmnSPE2x3UQ8pqgmyhL0z45wdu17DiHRKf9EfY3qxJVPVnmbrpJdxNQ",
     ],
     description:
       "Encuentra Bebida 7 Up lata 350 cc y toda la variedad de productos 7up navegando en el sitio web.",
@@ -623,7 +623,7 @@ const productos = [
     Variety: "Sugary Drink",
     container: "Botella",
     images: [
-      "https://lh3.googleusercontent.com/jr5Cr9LZPMKUos5nCiRdcVB3kEkV6cTIDcZm1cBfGOXl5UIklAkfaiWv6CBTiSeUMNqZf-ot6cvUXMs9J7OErqhMYFuQ0wmpfy-wFkxu",
+      "https://lh3.googleusercontent.com/VZHF0nSbbBBDbr7S8RmoTT-6vR3rJH0OtAc_Gs3hM1ApA42tzwn8Edjt65c-cZIppe1DTKYblGmnQczUVCFK-S7tAjkRMTbh6b1x_o0",
     ],
     description: "Encuentra Bebida sprite en botella.",
     ableDiscount: true,
@@ -642,7 +642,7 @@ const productos = [
     Variety: "Sugary Drink",
     container: "Botella",
     images: [
-      "https://lh3.googleusercontent.com/ghFKPhtvEOdU6_49jGzRyzny_sMbuqugh5Nc99e22MCRXpmEoT8kym0pik8nzzGg62SK-WPLCjLycBKYiUcooHe1vpFf2RNKaDviDtgI",
+      "https://lh3.googleusercontent.com/9bONlbryE-g9G6wScFzIFwgiSxbpGxCmu_NaBPrQ8JmWAfaYthJlNSa_o3jU-sUOpy_ulTDUtqnhoQLswTj68nbUBl9EN4YUjv323XJu",
     ],
     description: "Encuentra Bebida fanta en botella.",
     ableDiscount: true,
@@ -995,16 +995,16 @@ const productos = [
   },
   {
     sells: 10,
-    name: "Tequila Patron Silver En Estuche 750ml",
+    name: "Tequila Df Dorado Distrito Federal 750ml Extra Seco",
     price: 6.75,
     stock: 10,
     type: "Tequila",
-    brand: "Patron",
+    brand: "Distrito Federal Chilango´s",
     amount: 750,
     Variety: "Reposado",
     container: "Botella",
     images: [
-      "https://lh3.googleusercontent.com/URh0OxPjX8JqUu2dGI9pC2RpuxczDOf424Zptwh6KHG7l257LjyH-Qxa3G083xTD0Rt5Z-NAkGYwVeGK6aHFbqXY31msv8-YU3Pq5TqU",
+      "https://lh3.googleusercontent.com/pBZKoZTFaiKrKKLThbXuVa1vah-_DJ-KAqqktJsIgEih9UPhNL9u2D17401xIbMKaNwnbymylN-R4DbrLvn56CXh0TTfA9WouXpso8g",
     ],
     description: "Tequila Patron Silver En Estuche 750ml",
     ableDiscount: true,
