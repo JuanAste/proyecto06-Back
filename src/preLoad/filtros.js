@@ -37,15 +37,27 @@ const filtros = [
       "Distrito Federal Chilango´s",
       "Casa del Sol",
       "Camacho",
+      "Conquistador de Mexico",
+      "Corralejo",
+      "Patron"
     ],
   },
   {
     name: "marcaLiqueur",
-    data: ["Salentein Wine", "Christallino"],
+    data: [
+      "Salentein Wine",
+      "Christallino",
+      "Jack Daniels",
+      "Johnnie Walker",
+      "Monkey Shoulder",
+      "Old Parr",
+      "The Famous Grouse",
+      "White Horse"
+    ],
   },
   {
     name: "marcaDrinks",
-    data: ["San Luis", "Coca-Cola", "7 UP"],
+    data: ["San Luis", "Coca-Cola", "7 UP", "Fanta", "Ades", "Pepsi", "Pritty"],
   },
   {
     name: "saborBeer",
@@ -57,19 +69,27 @@ const filtros = [
   },
   {
     name: "saborTequila",
-    data: ["Dorado", "Añejo"],
+    data: ["Dorado", "Añejo", "Reposado", "ESPECIAL"],
   },
   {
     name: "saborLiqueur",
-    data: ["Pera", "Blend"],
+    data: [
+      "Pera",
+      "Blend",
+      "Black Label",
+      "Blended Malt",
+      "Blended Scotch",
+      "BLEND",
+      "Bourbon"
+    ],
   },
   {
     name: "saborDrinks",
-    data: ["Water", "Sugary Drink"],
+    data: ["Water", "Sugary Drink", "Juice"],
   },
   {
     name: "contenedor",
-    data: ["Lata", "Porron", "Botella"],
-  }
+    data: ["Lata", "Porron", "Botella", "Carton"],
+  },
 ];
 module.exports = { filtros };
