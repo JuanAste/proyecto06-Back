@@ -3,13 +3,27 @@ const { Products, Reviews } = require("../../db");
 
 const getAllProducts = async (req, res) => {
   try {
-    const { search, paginas } = req.query;
+    const { search, paginas, stock, status } = req.query;
     const pagina = (paginas - 1) * 10;
+    const findStock = {};
+    if (stock !== "" && stock === "true") {
+      findStock.stock = {[Op.gte]: 1};
+    }
+    if (stock !== "" && stock === "false") {
+      findStock.stock = {[Op.lte]: 0};
+    }
+    if (status !== "" && status === "true") {
+      findStock.availability = true;
+    }
+    if (status !== "" && status === "false") {
+      findStock.availability = false;
+    }
     const products = await Products.findAll({
       where: {
         name: {
           [Op.iLike]: `%${search}%`,
         },
+        ...findStock
       },
       offset: pagina,
       limit: 10,

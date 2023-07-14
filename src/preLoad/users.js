@@ -1,6 +1,6 @@
 const users = [
   {
-    email: "administrado123@gmail.com",
+    email: "finalproyecto06@gmail.com",
     userName: "pepito",
     admin:true
   },
