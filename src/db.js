@@ -53,8 +53,6 @@ Reviews.belongsToMany(Users, { through: "UsersReviews" });
 Users.belongsToMany(Pedidos, { through: "UsersPedidos" });
 Pedidos.belongsToMany(Users, { through: "UsersPedidos" });
 
-Products.belongsToMany(Pedidos, { through: "ProductsPedidos" });
-Pedidos.belongsToMany(Products, { through: "ProductsPedidos" });
 
 
 module.exports = {

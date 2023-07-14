@@ -13,7 +13,7 @@ router.get("/search", getByName);
 
 router.get("/all", getAllProducts);
 
-router.post("/filtrado", filterProduct);
+router.get("/filtrado", filterProduct);
 
 router.get("/:id", getByID);
 

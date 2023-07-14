@@ -1,93 +1,101 @@
 const { Op } = require("sequelize");
-const { Products, Reviews } = require("../../db");
+const { Products, Reviews, Users } = require("../../db");
 
 const filterProduct = async (req, res, next) => {
   const {
+    paginas,
+    search,
     tipos,
     ofertas,
-    porcentajeDesc,
+    porcentajeDescDesde,
+    porcentajeDescHasta,
     Variedad,
     marca,
-    contenido,
+    contenidoDesde,
+    contenidoHasta,
     envase,
-    ordenarmiento,
+    ordenarmientoName,
+    ordenarmientoOrder,
     cask,
-  } = req.body;
-  const { paginas, search } = req.query;
+  } = req.query;
 
   const pagina = (paginas - 1) * 10;
 
-  const findProduct = {availability: true, stock:{
-    [Op.gt]: 0
-  }};
+  const findProduct = {
+    availability: true,
+    stock: {
+      [Op.gt]: 0,
+    },
+  };
   const oredenar = [];
 
-  if (search !== "") {
+  if (search && search !== "") {
     findProduct.name = {
       [Op.iLike]: `%${search}%`,
     };
   }
 
-  if (tipos !== "") {
+  if (tipos && tipos !== "") {
     findProduct.type = {
       [Op.eq]: tipos,
     };
   }
 
-  if (cask > 0) {
+  if (cask && cask > 0) {
     findProduct.cask = {
       [Op.gte]: cask,
     };
   }
 
-  if (Variedad !== "") {
+  if (Variedad && Variedad !== "") {
     findProduct.Variety = {
       [Op.eq]: Variedad,
     };
   }
 
-  if (envase !== "") {
+  if (envase && envase !== "") {
     findProduct.container = {
       [Op.eq]: envase,
     };
   }
 
-  if (contenido && contenido.hasta > 0) {
+  if (contenidoDesde && contenidoHasta && contenidoHasta > 0) {
     findProduct.amount = {
-      [Op.between]: [contenido.desde, contenido.hasta],
+      [Op.between]: [contenidoDesde, contenidoHasta],
     };
   }
 
-  if (marca !== "") {
+  if (marca && marca !== "") {
     findProduct.brand = {
       [Op.eq]: marca,
     };
   }
 
-  if (ofertas !== "null") {
+  if (ofertas && ofertas !== "null") {
     findProduct.ableDiscount = {
       [Op.eq]: ofertas,
     };
   }
 
-  if (porcentajeDesc && porcentajeDesc.hasta > 0) {
+  if (porcentajeDescDesde && porcentajeDescHasta && porcentajeDescHasta > 0) {
     findProduct.ableDiscount = {
       [Op.eq]: true,
     };
     findProduct.percentageDiscount = {
-      [Op.between]: [porcentajeDesc.desde, porcentajeDesc.hasta],
+      [Op.between]: [porcentajeDescDesde, porcentajeDescHasta],
     };
   }
 
   if (
-    ordenarmiento &&
-    ordenarmiento.name !== "" &&
-    ordenarmiento.order !== ""
+    ordenarmientoName &&
+    ordenarmientoOrder &&
+    ordenarmientoName !== "" &&
+    ordenarmientoOrder !== ""
   ) {
-    oredenar.push([`${ordenarmiento.name}`, `${ordenarmiento.order}`]);
+    oredenar.push([`${ordenarmientoName}`, `${ordenarmientoOrder}`]);
   }
 
-  if(!oredenar.length){
+  if (!ordenarmientoName || !oredenar.length) {
     oredenar.push(["id", "ASC"]);
   }
 
@@ -95,7 +103,14 @@ const filterProduct = async (req, res, next) => {
     where: findProduct,
     offset: pagina,
     limit: 10,
-    include: [Reviews],
+    include: [
+      {
+        model: Reviews,
+        include: {
+          model: Users,
+        },
+      },
+    ],
     order: oredenar,
   })
     .then((products) => {

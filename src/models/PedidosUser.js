@@ -13,5 +13,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    productos: {
+      type: DataTypes.JSONB,
+      allowNull: false,
+      defaultValue: [],
+    },
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 };

@@ -33,9 +33,6 @@ module.exports = (sequelize) => {
     admin:{
       type: DataTypes.BOOLEAN,
     },
-    record: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-    },
     ban:{
       type: DataTypes.BOOLEAN,
     }
